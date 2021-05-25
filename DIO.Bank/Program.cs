@@ -8,8 +8,6 @@ namespace DIO.Bank
         static List<Conta> listContas =  new List<Conta>();
         static void Main(string[] args)
         {
-            //Conta minhaConta = new Conta(TipoConta.PessoaFisica, 0, 0,"Gabriel Suhett");
-            //Console.WriteLine(minhaConta.ToString());
             string opcaoUsuario = ObterOpcaoUsuario();
             while(opcaoUsuario.ToUpper() != "X")
             {
@@ -22,13 +20,13 @@ namespace DIO.Bank
                         InserirConta();
                         break;
                     case "3":
-                        //Transferir();
+                        Transferir();
                         break;
                     case "4":
-                        //Sacar();
+                        Sacar();
                         break;
                     case "5":
-                        //Depositar();
+                        Depositar();
                         break;
                     case "C":
                         Console.Clear();
@@ -41,6 +39,41 @@ namespace DIO.Bank
             }
             Console.WriteLine("Obrigado por utilizar nossos serviços. Volte Sempre!");
             Console.ReadLine();
+        }
+
+        private static void Transferir()
+        {
+            Console.WriteLine("Digite o numero da conta de origem: ");
+            int indiceContaOrigem = int.Parse(Console.ReadLine());
+            Console.WriteLine("Digite o numero da conta de destino: ");
+            int indiceContaDestino = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Digite o valor que deseja transferir: ");
+            double valorTransferencia = double.Parse(Console.ReadLine());
+
+             listContas[indiceContaOrigem].Transferir(valorTransferencia, listContas[indiceContaDestino]);
+        }
+
+        private static void Depositar()
+        {
+            Console.WriteLine("Digite o numero da conta: ");
+            int indiceConta = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Digite o valor do depósito: ");
+            double valorDeposito = double.Parse(Console.ReadLine());
+
+            listContas[indiceConta].Depositar(valorDeposito);
+        }
+
+        private static void Sacar()
+        {
+            Console.WriteLine("Digite o numero da conta: ");
+            int indiceConta = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Digite o valor do saque: ");
+            double valorSaque = double.Parse(Console.ReadLine());
+
+            listContas[indiceConta].Sacar(valorSaque);
         }
 
         private static void ListarContas()
